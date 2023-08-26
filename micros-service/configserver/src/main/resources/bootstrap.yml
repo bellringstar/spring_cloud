@@ -1,0 +1,34 @@
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active:
+      - native, git # ,로 분리된 프로파일을 모두 매핑
+  cloud:
+    config:
+      server:
+        encrypt.enabled: false
+        native:
+          search-locations: classpath:/config
+        git: # git을 백엔드 저장소로 사용하라는 지시
+          uri: https://github.com/klimtever/config.git #git repository
+          searchPaths: licensingservice #config 구성 파일을 찾는 데 사용될 깃 경로
+        vault:
+          port: 8200
+          host: 127.0.0.1
+          kvVersion: 2
+          profile-separator: /
+          backend: licensing-service
+server:
+  port: 8071
+  
+encrypt:
+  key: fje83Ki8403Iod87dne7Yjsl3THueh48jfuO9j4U2hf64Lo 
+
+#Enable all Spring Boot Actuator endpoints.
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
