@@ -1,0 +1,17 @@
+server:
+  port: 8071
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native, git
+
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config #src/main/resources/config
+        git:
+          uri: https://github.com/bellringstar/spring_cloud
+          search-paths: licensingservice
